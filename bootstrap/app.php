@@ -17,4 +17,8 @@ $container['view'] = function ($container) {
     return new \Slim\Views\PhpRenderer(__DIR__ . '/../resources/views');
 };
 
+$container['MainController'] = function ($container) {
+	return new \App\Controllers\MainController($container);
+};
+
 require_once '../app/routes.php';

@@ -1,7 +1,22 @@
 <?php
 //Маршрутизаторы
-$app->get('/home/{name}', function($request, $response, $args){
+$app->get('/article/{name}', function($request, $response, $args){
     return $this->view->render($response, 'home.phtml', [
-        'name' => $args['name']
+        'a' => $args['name']
     ]);
-})->setName('profile');
+});
+
+$app->get('/', 'MainController:index');
+
+
+/**
+
+$app->get('/', function($request, $response, $args){
+	
+    return $this->view->render($response, 'home.phtml', [
+        'a' =>  $name
+    ]);
+});
+
+*/
+
