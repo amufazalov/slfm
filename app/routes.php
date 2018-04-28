@@ -7,6 +7,7 @@ $app->get('/article/{name}', function($request, $response, $args){
 });
 
 $app->get('/', 'MainController:index');
+$app->get('/parser/', 'ParseController:index');
 
 
 /**
