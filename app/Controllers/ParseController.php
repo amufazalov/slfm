@@ -7,12 +7,12 @@ class ParseController extends Controller{
     public function index(){
 
         $html = file_get_contents('http://magicserv.ru/katalog-tovarov/odnorazovaya-odezhda/');
-        //echo $html;
+       // echo $html;
         //Объект phpQuery
         $doc = \phpQuery::newDocument($html);
          //Получаем все блоки .product, где хранится нужная нам информация
         $lists = pq('.wrapper_content')->children('.product');
-        //Заводим массив для хранения заголовков
+        //Заводим массив для хранения ссылки
         $links = array();
         //Проходимся по каждому блоку и преобразуем в объект типа phpQuery для дальнейшего распарсинга
         foreach($lists as $item){
@@ -37,12 +37,22 @@ class ParseController extends Controller{
              $i++;
              \phpQuery::unloadDocuments();
         }
-                
+              
+  //      print '<pre>';
+  //      print_r($data);
+        
+        $file = fopen('products.csv', "a");
+        foreach ($data as $item) fputcsv($file, $item, '||');
+        fclose($file);
+        
+        
+        
+        /*
         foreach($data as $item){
             echo "<h2>{$item['title']}</h2>";
             echo "<h3>{$item['price']}</h3>";
             echo $item['desc'] . '<hr/>';
-        }
+        }*/
         
     }
 }
